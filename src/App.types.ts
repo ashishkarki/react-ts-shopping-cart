@@ -8,9 +8,14 @@ export type CartItemType = {
   amount: number
 }
 
-export type AppFunctions = {
-  //   nameRenderer?: (name: string) => React.ReactNode
+export type ItemPropsType = {
+  item: CartItemType
+  handleAddToCart: (clickedItem: CartItemType) => void
+}
+
+export type AppLogicParams = {
+  data: CartItemType[] | undefined
   getTotalItems: () => number
-  handleAddToCart: () => null
+  handleAddToCart: (clickedItem: CartItemType) => null
   handleRemoveFromCart: () => null
 }
