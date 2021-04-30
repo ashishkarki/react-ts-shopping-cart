@@ -1,28 +1,42 @@
-import React, { useState } from 'react'
-import { Drawer, Grid } from '@material-ui/core'
+import { Badge, Drawer, Grid } from '@material-ui/core'
+import { AddShoppingCart } from '@material-ui/icons'
 
-import { Wrapper, StyledButton } from './AppLogic.styles'
-import { AppLogicParams, CartItemType } from './App.types'
+import { AppLogicWrapper, StyledButton } from './AppLogic.styles'
+import { AppLogicParams } from './App.types'
 import Item from './components/Item/Item'
+import Cart from './components/Cart/Cart'
 
 const AppLogic: React.FC<AppLogicParams> = ({
   data,
+
+  isCartOpen,
+  setIsCartOpen,
+  cartItems,
+  setCartItems,
+
   getTotalItems,
   handleAddToCart,
   handleRemoveFromCart,
 }) => {
-  const [isCartOpen, setIsCartOpen] = useState(false)
-  const [cartItems, setCartItems] = useState([] as CartItemType[])
-
   return (
-    <Wrapper>
+    <AppLogicWrapper>
       <Drawer
         anchor='right'
         open={isCartOpen}
         onClose={() => setIsCartOpen(false)}
       >
-        Cart goes here...
+        <Cart
+          cartItems={cartItems}
+          addToCart={handleAddToCart}
+          removeFromCart={handleRemoveFromCart}
+        />
       </Drawer>
+
+      <StyledButton onClick={() => setIsCartOpen(true)}>
+        <Badge badgeContent={getTotalItems(cartItems)} color='error'>
+          <AddShoppingCart />
+        </Badge>
+      </StyledButton>
 
       <Grid container spacing={3}>
         {data?.map(dataItem => (
@@ -31,7 +45,7 @@ const AppLogic: React.FC<AppLogicParams> = ({
           </Grid>
         ))}
       </Grid>
-    </Wrapper>
+    </AppLogicWrapper>
   )
 }
 

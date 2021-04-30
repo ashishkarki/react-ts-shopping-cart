@@ -8,14 +8,34 @@ export type CartItemType = {
   amount: number
 }
 
+// Item that is shown in the main page which can be added to the cart
 export type ItemPropsType = {
   item: CartItemType
   handleAddToCart: (clickedItem: CartItemType) => void
 }
 
+// the item that has been added to the cart
+export type CartPropsType = {
+  cartItems: CartItemType[]
+  addToCart: (clickedItem: CartItemType) => void
+  removeFromCart: (id: number) => void
+}
+
+export type CartItemPropsType = {
+  item: CartItemType
+  addToCart: (clickedItem: CartItemType) => void
+  removeFromCart: (id: number) => void
+}
+
 export type AppLogicParams = {
   data: CartItemType[] | undefined
-  getTotalItems: () => number
-  handleAddToCart: (clickedItem: CartItemType) => null
-  handleRemoveFromCart: () => null
+
+  isCartOpen: boolean
+  setIsCartOpen: (isCartOpen: boolean) => void
+  cartItems: CartItemType[]
+  setCartItems: (cartItems: CartItemType[]) => void
+
+  getTotalItems: (cartItems: CartItemType[]) => number
+  handleAddToCart: (clickedItem: CartItemType) => void
+  handleRemoveFromCart: (id: number) => void
 }

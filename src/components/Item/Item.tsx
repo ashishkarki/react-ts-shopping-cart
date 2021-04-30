@@ -1,10 +1,10 @@
 import React from 'react'
 
 import { ItemPropsType } from '../../App.types'
-import { Wrapper } from './Item.styles'
+import { ItemWrapper } from './Item.styles'
 
 const Item: React.FC<ItemPropsType> = ({ item, handleAddToCart }) => (
-  <Wrapper>
+  <ItemWrapper>
     <img src={item.image} alt={item.title} />
 
     <div>
@@ -14,7 +14,7 @@ const Item: React.FC<ItemPropsType> = ({ item, handleAddToCart }) => (
     </div>
 
     <button onClick={() => handleAddToCart(item)}>Add to Cart</button>
-  </Wrapper>
+  </ItemWrapper>
 )
 
 export default Item
